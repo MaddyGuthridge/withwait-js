@@ -1,6 +1,6 @@
 {
   "name": "withwait",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "description": "Ensure operations involving sleeping always complete, even if an exception occurs during execution",
   "keywords": [
     "withwait",
