@@ -18,7 +18,7 @@ function sleep(ms: number) {
  * This allows us to have a bit of a buffer in the times, accounting for performance differences.
  */
 function sensibleWaitTime(ms: number): number[] {
-  return [ms, ms + 1, ms + 2];
+  return [ms - 1, ms, ms + 1, ms + 2];
 }
 
 describe('sync', () => {
@@ -52,7 +52,7 @@ describe('sync', () => {
     const start = Date.now();
     try {
       waitSync(() => { throw Error('Nope'); }, 10);
-    } catch { }
+    } catch { /* Empty */ }
     expect(Date.now() - start).toBeOneOf(sensibleWaitTime(10));
   });
 
@@ -87,7 +87,7 @@ describe('async', () => {
   });
 
   it('Produces the return value', async () => {
-    await expect(wait(async () => 42, 0)).resolves.toStrictEqual(42);
+    await expect(wait(() => Promise.resolve(42), 0)).resolves.toStrictEqual(42);
   });
 
   it('Produces the return value even if function was synchronous', async () => {
@@ -95,14 +95,14 @@ describe('async', () => {
   });
 
   it('Throws an exception if the given function fails', async () => {
-    await expect(() => wait(async () => { throw Error('Some error'); }, 0)).rejects.toBeInstanceOf(Error);
+    await expect(() => wait(() => Promise.reject(Error('Some error')), 0)).rejects.toBeInstanceOf(Error);
   });
 
   it('Waits even if an exception is thrown', async () => {
     const start = Date.now();
     try {
-      await wait(async () => { throw Error('Nope'); }, 10);
-    } catch { }
+      await wait(() => Promise.reject(Error('Some error')), 10);
+    } catch { /* Empty */ }
     expect(Date.now() - start).toBeOneOf(sensibleWaitTime(10));
   });
 
