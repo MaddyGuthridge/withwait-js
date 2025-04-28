@@ -1,7 +1,9 @@
+/** Synchronous sleep */
 function sleepUntilSync(end: number) {
   while (Date.now() < end) { /* Empty */ }
 }
 
+/** Async sleep */
 function sleepUntilAsync(end: number) {
   const ms = end - Date.now();
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -19,7 +21,7 @@ export function waitSync<T>(callback: () => T, ms: number): T {
   }
 }
 
-export async function wait<T>(callback: () => Promise<T>, ms: number): Promise<T> {
+export async function wait<T>(callback: () => Promise<T> | T, ms: number): Promise<T> {
   const end = Date.now() + ms;
   try {
     const result = await callback();
