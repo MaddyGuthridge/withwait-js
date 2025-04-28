@@ -1,11 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { waitSync, wait } from '../src';
-
-/** Synchronous sleep */
-function sleepSync(ms: number) {
-  const end = Date.now() + ms;
-  while (Date.now() < end) { /* Empty */ }
-}
+import slync from 'slync';
 
 /** Async sleep */
 function sleep(ms: number) {
@@ -30,13 +25,13 @@ describe('sync', () => {
 
   it('Only waits the required remaining time', () => {
     const start = Date.now();
-    waitSync(() => sleepSync(5), 10);
+    waitSync(() => slync(5), 10);
     expect(Date.now() - start).toBeOneOf(sensibleWaitTime(10));
   });
 
   it('Returns with no additional wait if the callback runs beyond the allotted time', () => {
     const start = Date.now();
-    waitSync(() => sleepSync(10), 5);
+    waitSync(() => slync(10), 5);
     expect(Date.now() - start).toBeOneOf(sensibleWaitTime(10));
   });
 

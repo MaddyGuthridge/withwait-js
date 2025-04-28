@@ -1,6 +1,9 @@
+import slync from 'slync';
+
 /** Synchronous sleep */
 function sleepUntilSync(end: number) {
-  while (Date.now() < end) { /* Empty */ }
+  const ms = end - Date.now();
+  slync(ms);
 }
 
 /** Async sleep */
