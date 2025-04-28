@@ -25,7 +25,9 @@ describe('sync', () => {
 
   it('Only waits the required remaining time', () => {
     const start = Date.now();
+    // Sleep for 5ms in wait fn
     waitSync(() => slync(5), 10);
+    // Despite that, it should only wait 5ms not 10ms
     expect(Date.now() - start).toBeOneOf(sensibleWaitTime(10));
   });
 
