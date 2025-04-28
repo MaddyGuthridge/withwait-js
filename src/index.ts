@@ -1,11 +1,5 @@
 import slync from 'slync';
 
-/** Synchronous sleep */
-function sleepUntilSync(end: number) {
-  const ms = end - Date.now();
-  slync(ms);
-}
-
 /** Async sleep */
 function sleepUntilAsync(end: number) {
   const ms = end - Date.now();
@@ -30,12 +24,12 @@ function sleepUntilAsync(end: number) {
  * @returns return value of the callback.
  */
 export function waitSync<T>(callback: () => T, ms: number): T {
-  const end = Date.now() + ms;
   try {
     const result = callback();
-    sleepUntilSync(end);
+    slync(ms);
     return result;
   } catch (e) {
+    const end = Date.now() + ms;
     sleepUntilSync(end);
     throw e;
   }
