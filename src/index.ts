@@ -24,13 +24,17 @@ function sleepUntilAsync(end: number) {
  * @returns return value of the callback.
  */
 export function waitSync<T>(callback: () => T, ms: number): T {
+  const end = Date.now() + ms;
   try {
     const result = callback();
-    slync(ms);
+    if (end > Date.now()) {
+      slync(end - Date.now());
+    }
     return result;
   } catch (e) {
-    const end = Date.now() + ms;
-    sleepUntilSync(end);
+    if (end > Date.now()) {
+      slync(end - Date.now());
+    }
     throw e;
   }
 }
