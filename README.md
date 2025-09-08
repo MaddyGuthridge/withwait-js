@@ -26,9 +26,11 @@ import { wait } from 'withwait';
 
 const result = await wait(() => {
     // Do some operation
+    return 'foo';
 }, 1000);
 
 // At this point, at least 1000 ms is guaranteed to have passed
+console.log(result); // 'foo'
 ```
 
 Even if an error is thrown, the time will still pass.
@@ -44,7 +46,7 @@ try {
     // jump to the `catch` block.
 } catch (e) {
     // 1000 ms has passed
-    console.log('Error was caught:', e);
+    console.log('Error was caught:', e); // 'Error: Uh oh!'
 }
 ```
 
