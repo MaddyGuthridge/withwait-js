@@ -5,7 +5,7 @@ updates:
     schedule:
       interval: "monthly"
     cooldown:
-      default-days: 3
+      default-days: 7
     groups:
       eslint:
         applies-to: version-updates
@@ -41,14 +41,9 @@ updates:
       # target node version.
       - dependency-name: "@types/node"
         update-types: ["version-update:semver-major"]
-  # - package-ecosystem: "docker"
-  #   # Dockerfiles are in subdirectory
-  #   directory: "/docker"
-  #   schedule:
-  #     interval: "monthly"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
     cooldown:
-      default-days: 3
+      default-days: 7
