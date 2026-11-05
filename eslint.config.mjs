@@ -91,6 +91,7 @@ export default ts.config(
       '**/vitest.config.ts',
       'eslint.config.mjs',
       'vite.config.ts',
+      'tsdown.config.ts',
     ],
   },
 );
