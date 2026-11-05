@@ -12,11 +12,13 @@
         "types": [
             "node"
         ],
-        "moduleResolution": "node",
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
         "noImplicitAny": true,
         "noUnusedLocals": true,
         "sourceMap": true,
         "strict": true,
+        "rootDir": "src",
         "outDir": "dist/esm",
         "target": "es6",
     },
