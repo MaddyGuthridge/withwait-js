@@ -3,6 +3,7 @@ import slync from 'slync';
 /** Async sleep */
 function sleepUntilAsync(end: number) {
   const ms = end - Date.now();
+  if (ms <= 0) return;
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 

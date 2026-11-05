@@ -1,6 +1,6 @@
 {
   "name": "withwait",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Ensure operations involving sleeping always complete, even if an exception occurs during execution",
   "keywords": [
     "withwait",
@@ -20,8 +20,9 @@
   "files": [
     "dist"
   ],
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
   "scripts": {
     "test": "vitest run",
     "tc": "vitest run --coverage",
@@ -30,22 +31,19 @@
     "preattw": "npm run build",
     "attw": "attw --pack .",
     "tsc": "tsc --noEmit",
-    "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
-    "prepare": "npm run build"
+    "build": "tsdown"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.2",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^10.0.1",
-    "@types/node": "^25.0.3",
-    "@vitest/coverage-v8": "^4.0.14",
+    "@types/node": "^22.20.5",
+    "@vitest/coverage-v8": "^5.0.5",
     "eslint": "^10.0.2",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.8.3",
+    "tsdown": "^0.23.3",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.31.0",
-    "vitest": "^4.0.14"
+    "vitest": "^5.0.5"
   },
   "dependencies": {
     "slync": "^1.0.2"
